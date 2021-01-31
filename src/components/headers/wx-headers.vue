@@ -1,12 +1,12 @@
-<!--  -->
+<!-- 微信头部 -->
 <template>
   <div>
-      hello vue3
-      <wxHeaders></wxHeaders>
+      这是组件
   </div>
 </template>
 <script >
 export default {
+    name:'wxHeaders',
     data() {
       return{
       }
