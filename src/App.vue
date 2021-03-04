@@ -98,7 +98,7 @@ html, body {
   z-index: 1000;
 }
 .wx-background-color{
-  background: rgba(237,237,237,0.5);
+  background: rgba(237,237,237);
 }
 .wx-content-color{
   background: #F7F7F7;

@@ -5,21 +5,14 @@ import store from './store'
 import router from './router'
 import 'lib-flexible/flexible'
 import 'vant/lib/index.css'; // 全局引入样式
+import '@/common/mock'
+// import '@/common/js/utils.js'
+import $api from '@/api'
 import BetterScroll from '@/components/wxScroll'
 const app = createApp(App) // 创建实例
 app.component('wx-better-scroll', BetterScroll)
+app.config.globalProperties.$api = $api
 // 全局过滤器
-app.config.globalProperties.$filters = {
-  prefix(url) {
-    if (url && url.startsWith('http')) {
-      return url
-    } else {
-      url = `http://47.99.134.126:28019${url}`
-      return url
-    }
-  }
-}
-
 app.use(ActionBarButton)
   .use(ActionBarIcon)
   .use(ActionBar)

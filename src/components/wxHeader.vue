@@ -1,7 +1,7 @@
 <template>
   <div class="wx-header van-hairline--bottom wx-background-color">
       <i class="iconfont icon-back1"  v-if="isback"></i>
-      <i v-else>&nbsp;&nbsp;</i>
+      <i v-else>&nbsp;&nbsp;&nbsp;&nbsp;</i>
       <div class="wx-header-content">{{content}}</div>
       <i :class="'iconfont '+rightIcon" v-if="rightIcon!=''"></i>
       <div v-else>&nbsp;&nbsp;</div>
