@@ -6,7 +6,6 @@ export let dealwithTimeByChat = function(time) {
   let hour = Math.abs(parseInt((d_day - currentTime)/1000/3600));//计算小时
   let minutes = Math.abs(parseInt((d_day - currentTime)/1000/60));//计算分钟
   let seconds = Math.abs(parseInt((d_day - currentTime)/1000));//计算秒
-  console.log(day);
   if(day>=365){
     return parseInt(day%365)+"年前";
   }else

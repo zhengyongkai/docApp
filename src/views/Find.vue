@@ -1,7 +1,8 @@
 <!--  -->
 <template>
   <div>
-      <wx-header :content="'消息'" :rightIcon="'icon-add'"></wx-header>
+      <wx-header :content="'发现'" :rightIcon="'icon-add'"></wx-header>
+       
        <wx-nav-bar :content="'消息'"></wx-nav-bar >
   </div>
 </template>

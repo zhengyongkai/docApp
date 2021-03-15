@@ -58,7 +58,7 @@ export default {
   left: 0;
   right: 0;
   top: 45px;
-  bottom: 50px;
+  bottom: 40px;
   overflow-y: scroll;
   overflow-x: hidden;
 }

@@ -60,10 +60,10 @@ export default {
       })
       this.bs.on('scroll', () => {
           console.log('scrolling-')
-        })
+      })
         this.bs.on('scrollEnd', () => {
           console.log('scrollingEnd')
-        })
+      })
     } 
   }
 }
