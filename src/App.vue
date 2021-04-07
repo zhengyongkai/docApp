@@ -37,8 +37,8 @@ import { useRouter } from 'vue-router'
 
 <style lang="less">
 @font-face {
-  font-family: "fangping";
-  src: url("./assets/fonts/fangping.ttf");
+  // font-family: "fangping";
+  // src: url("./assets/fonts/fangping.ttf");
   /* font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
     Helvetica, Segoe UI, Arial, Roboto, "PingFang SC", "miui",
     "Hiragino Sans GB", "Microsoft Yahei", sans-serif; */
@@ -50,9 +50,9 @@ html, body {
 }
 #app {
   height: 100%;
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  // font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
   // text-align: center;
   color: #2c3e50;
 }
