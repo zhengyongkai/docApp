@@ -149,14 +149,16 @@
               </div>
             </div>
             <div class="msc-right">
-                <img src="@/assets/user.jpg"/><div>_V</div>
+              <img src="@/assets/user.jpg" />
+              <div>_V</div>
             </div>
           </div>
         </div>
         <div class="musicContent"><router-view></router-view></div>
-        <musicBottom></musicBottom>
+        <musicBottom @handle="onHandle"></musicBottom>
       </div>
     </div>
+   
   </div>
 </template>
 <script>
@@ -174,13 +176,18 @@ export default {
     musicBottom: musicBottom,
   },
   created() {},
-  mounted() {},
+  mounted() {
+      
+  },
   methods: {
     selectItem(val) {
       this.select = val;
     },
     show(key) {
       this[key] = !this[key];
+    },
+    onHandle() {
+      
     },
   },
 };
@@ -278,19 +285,19 @@ export default {
           font-size: 14px;
         }
       }
-      .msc-right{
-          margin-left: auto;
-          display: flex;
-          align-items: center;
-          img{
-              width: 20px;
-              height: 20px;
-              margin-right: 10px;
-              border-radius: 50%;
-          }
-          div{
-              font-size: 14px;
-          }
+      .msc-right {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        img {
+          width: 20px;
+          height: 20px;
+          margin-right: 10px;
+          border-radius: 50%;
+        }
+        div {
+          font-size: 14px;
+        }
       }
       .msc-index {
         font-size: 12px;
