@@ -2,7 +2,7 @@
 <template>
   <div class="musicBottom">
     <div class="svg">
-      <div style="display:flex;height:5px;align-items:center">
+      <div style="display:flex;height:5px;align-items:center" @mousedown="down">
         <div class="jindu" :style="'width:' + width + '%'"></div>
         <div style="flex:1;background:#eee;height:1px"></div>
       </div>
@@ -67,6 +67,9 @@ export default {
     
   },
   methods: {
+    down(event){
+      this.width = (event.offsetX / event.target.clientWidth ) * 100
+    },
     format(seconds) {
 			let hour = Math.floor(seconds / 3600) >= 10 ? Math.floor(seconds / 3600) : '0' + Math.floor(seconds / 3600);
 			seconds -= 3600 * hour;
