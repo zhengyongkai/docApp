@@ -6,12 +6,17 @@ import router from './router'
 import 'lib-flexible/flexible'
 import 'vant/lib/index.css'; // 全局引入样式
 import '@/common/mock'
+import axios from '@utils/axios'
+import http from '@utils/http'
 // import '@/common/js/utils.js'
 import $api from '@/api'
 import BetterScroll from '@/components/wxScroll'
+
 const app = createApp(App) // 创建实例
 app.component('wx-better-scroll', BetterScroll)
 app.config.globalProperties.$api = $api
+app.config.globalProperties.$axios = axios;
+app.config.globalProperties.$http = http;
 // 全局过滤器
 app.use(ActionBarButton)
   .use(ActionBarIcon)

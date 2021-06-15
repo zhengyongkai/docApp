@@ -155,14 +155,13 @@
           </div>
         </div>
         <div class="musicContent"><router-view></router-view></div>
-        <musicBottom @handle="onHandle"></musicBottom>
+        <!-- <musicBottom @handle="onHandle"></musicBottom> -->
       </div>
     </div>
-   
   </div>
 </template>
 <script>
-import musicBottom from "@/components/musicBottom.vue";
+// import musicBottom from "@/components/musicBottom.vue";
 export default {
   data() {
     return {
@@ -173,11 +172,29 @@ export default {
   },
   props: [],
   components: {
-    musicBottom: musicBottom,
+    // musicBottom: musicBottom,
   },
   created() {},
   mounted() {
-      
+    this.$http
+      .post("/home/Login/doLogin_wt?username=zhengyongkai1&password=admin", {
+        username: "zhengyongkai1",
+        password: "admin",
+      })
+      .then((res) => {
+        this.$store.commit("setToken", JSON.stringify(res.token));
+        setTimeout(() => {
+          this.$http
+          .post("/home/group/xxx", {
+            username: "zhengyongkai1",
+            password: "admin",
+          })
+          .then((res) => {
+            console.log(res);
+            // this.$store.commit('setToken', res.token);
+          });
+        }, 2000);
+      });
   },
   methods: {
     selectItem(val) {
@@ -186,9 +203,7 @@ export default {
     show(key) {
       this[key] = !this[key];
     },
-    onHandle() {
-      
-    },
+    onHandle() {},
   },
 };
 </script>
