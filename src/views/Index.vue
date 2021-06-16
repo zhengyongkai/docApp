@@ -177,23 +177,13 @@ export default {
   created() {},
   mounted() {
     this.$http
-      .post("/home/Login/doLogin_wt?username=zhengyongkai1&password=admin", {
+      .post("/home/group/xxx", {
         username: "zhengyongkai1",
         password: "admin",
       })
       .then((res) => {
-        this.$store.commit("setToken", JSON.stringify(res.token));
-        setTimeout(() => {
-          this.$http
-          .post("/home/group/xxx", {
-            username: "zhengyongkai1",
-            password: "admin",
-          })
-          .then((res) => {
-            console.log(res);
-            // this.$store.commit('setToken', res.token);
-          });
-        }, 2000);
+        console.log(res);
+        // this.$store.commit('setToken', res.token);
       });
   },
   methods: {
@@ -328,7 +318,7 @@ export default {
           border-radius: 20px;
           .icon {
             width: 15px;
-            margin:0 3px;
+            margin: 0 3px;
             line-height: 22px;
             height: 24px;
             text-align: center;

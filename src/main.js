@@ -11,13 +11,16 @@ import http from '@utils/http'
 // import '@/common/js/utils.js'
 import $api from '@/api'
 import BetterScroll from '@/components/wxScroll'
-
+import {message} from 'ant-design-vue'
+import 'ant-design-vue/dist/antd.css';
 const app = createApp(App) // 创建实例
 app.component('wx-better-scroll', BetterScroll)
 app.config.globalProperties.$api = $api
 app.config.globalProperties.$axios = axios;
 app.config.globalProperties.$http = http;
-import 'ant-design-vue/dist/antd.css';
+app.config.globalProperties.$message = message
+
+
 // 全局过滤器
 app.use(ActionBarButton)
   .use(ActionBarIcon)
@@ -50,7 +53,6 @@ app.use(ActionBarButton)
   .use(Checkbox)
   .use(CheckboxGroup)
   .use(Skeleton)
-
 app.use(router)
 app.use(store)
 

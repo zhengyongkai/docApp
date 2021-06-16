@@ -1,20 +1,20 @@
 import axios from "axios";
 import Store from "../store";
-import router from '@router';
-import {notification} from 'ant-design-vue'
+import router from "@router";
+import { notification } from "ant-design-vue";
 /**
  * 用于对响应数据的处理
  * @param {Object} response 响应数据
  */
 function Intercept(response) {
-  console.log(response.code);
-  switch (response.code) {
-    case 200:
-      notification['error']({
-        message: '登陆失效',
-        description:
-          '登录失效，请重新登陆',
+  switch (parseInt(response.code)) {
+    case -1:
+      notification["error"]({
+        message: "失败",
+        description: response.msg,
       });
+      return Promise.reject(response.data);
+    case 200:
       return response.data;
     case 400:
       return Promise.reject(response.data);
@@ -28,8 +28,11 @@ function Intercept(response) {
       return Promise.reject(response.data);
     //登录端token失效
     case 4101:
-      router && router.replace({name:'home'})
-     
+      notification["error"]({
+        message: "登陆失效",
+        description: "登录失效，请重新登陆",
+      });
+      router && router.replace({ name: "login" });
       return Promise.reject(response.data);
     default:
       return Promise.reject(response.data);
