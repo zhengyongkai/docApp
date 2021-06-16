@@ -30,5 +30,6 @@ module.exports = {
             .set('@common',resolve('src/common'))
             .set('@views',resolve('src/views'))
             .set('@utils',resolve('src/utils'))
+            .set('@router',resolve('src/router'))
     }
 }

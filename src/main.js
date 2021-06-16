@@ -17,6 +17,7 @@ app.component('wx-better-scroll', BetterScroll)
 app.config.globalProperties.$api = $api
 app.config.globalProperties.$axios = axios;
 app.config.globalProperties.$http = http;
+import 'ant-design-vue/dist/antd.css';
 // 全局过滤器
 app.use(ActionBarButton)
   .use(ActionBarIcon)

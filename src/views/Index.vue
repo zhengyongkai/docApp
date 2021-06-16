@@ -317,7 +317,7 @@ export default {
       .msc-index {
         font-size: 12px;
         margin: 2px 0;
-        width: 120px;
+        width: 160px;
         .msc-index-search {
           display: flex;
           height: 24px;
@@ -328,11 +328,12 @@ export default {
           border-radius: 20px;
           .icon {
             width: 15px;
-            margin: 5px;
+            margin:0 3px;
+            line-height: 22px;
             height: 24px;
             text-align: center;
             .search-icon {
-              width: 10px;
+              width: 20px;
               height: 20px;
               color: #e4e4e4;
             }
@@ -346,11 +347,10 @@ export default {
             word-spacing: normal;
             text-transform: none;
             text-indent: 0px;
+            color: #333;
             text-shadow: none;
             background-color: transparent;
             cursor: text;
-            margin: 0em;
-            padding: 10px 0 10px 0;
             overflow: hidden;
           }
         }
@@ -358,17 +358,17 @@ export default {
       ::-webkit-input-placeholder {
         /* WebKit browsers */
         color: #e2e2e2;
-        font-size: 10px;
+        font-size: 12px;
       }
       ::-moz-placeholder {
         /* Mozilla Firefox 19+ */
         color: #e2e2e2;
-        font-size: 10px;
+        font-size: 12px;
       }
       :-ms-input-placeholder {
         /* Internet Explorer 10+ */
         color: #e2e2e2;
-        font-size: 10px;
+        font-size: 12px;
       }
     }
   }
