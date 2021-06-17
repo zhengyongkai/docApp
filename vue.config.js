@@ -8,7 +8,7 @@ module.exports = {
     //生成环境请用第三方代理软件，如nginx。
     devServer: {
         port: 9999, //本机端口号
-        host: "localhost", //本机主机名
+        host: "0.0.0.0", //本机主机名
         https: false, //协议
         open: true, //启动服务器时自动打开浏览器访问
         proxy: {

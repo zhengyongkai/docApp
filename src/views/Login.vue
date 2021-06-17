@@ -47,10 +47,10 @@
         </div>
         <div v-else>
           <div class="qq_login">
-            <div style="position:relative">
-              <img :src="qrCode" alt="" /><br />
-              <div class="cover" v-if="guoqi">
-                <div style="margin-top: 10%;">
+            <div style="position:relative;width:100%" >
+              <img :src="qrCode"  alt="" style="width:300px;height:300px" /><br />
+              <div class="cover" v-if="guoqi" @click="getNewCode">
+                <div style="margin-top: 80px;">
                   <i class="iconfont icon-8" />
                 </div>
               </div>
@@ -88,16 +88,21 @@ export default {
     this.timer = null
   },
   methods: {
+    getNewCode(){
+      this.getQrCode('sss');
+    },
     getQrCode(params) {
       this.$api.getqrCode(params).then((res) => {
+        clearInterval(this.timer)
         this.qrCode = res.qrcode;
         this.guoqi = false;
         this.timer = setInterval(() => {
           this.num++;
           if (this.num == 60) {
+            this.num = 0;
             this.guoqi = true;
           }
-        },1000);
+        },100);
       });
     },
     choose(type) {

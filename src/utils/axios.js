@@ -66,9 +66,9 @@ $axios.interceptors.response.use(
   (response) => {
     return Intercept(response.data);
   },
-  () => {
+  (res) => {
     return Intercept({
-      data: "网络请求错误!",
+      data:res,
       code: 404,
     });
   }
