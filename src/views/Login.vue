@@ -45,6 +45,19 @@
             注册新账号
           </div>
         </div>
+        <div v-else>
+          <div class="qq_login">
+            <div style="position:relative">
+              <img :src="qrCode" alt="" /><br />
+              <div class="cover" v-if="guoqi">
+                <div style="margin-top: 10%;">
+                  <i class="iconfont icon-8" />
+                </div>
+              </div>
+            </div>
+            扫码登陆
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -58,13 +71,35 @@ export default {
         username: "",
         password: "",
       },
+      qrCode: "",
+      num: 0,
+      guoqi: false,
+      timer: null,
     };
   },
   props: [],
   components: {},
   created() {},
-  mounted() {},
+  mounted() {
+    this.getQrCode("sss");
+  },
+  unmounted(){
+    clearInterval(this.timer)
+    this.timer = null
+  },
   methods: {
+    getQrCode(params) {
+      this.$api.getqrCode(params).then((res) => {
+        this.qrCode = res.qrcode;
+        this.guoqi = false;
+        this.timer = setInterval(() => {
+          this.num++;
+          if (this.num == 60) {
+            this.guoqi = true;
+          }
+        },1000);
+      });
+    },
     choose(type) {
       this.itemType = type;
     },
@@ -77,7 +112,7 @@ export default {
       this.$api.login(this.formData).then((res) => {
         this.$message.success("登陆成功");
         this.$store.commit("setToken", JSON.stringify(res.token));
-        this.$router.replace({name:'index'})
+        this.$router.replace({ name: "index" });
       });
     },
   },
@@ -133,6 +168,19 @@ export default {
   }
   input:focus {
     border: 1px solid @blue;
+  }
+  .cover {
+    position: absolute;
+    background: #333;
+    opacity: 0.8;
+    color: #000;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    i {
+      font-size: 64px;
+    }
   }
 }
 .login_button {
