@@ -9,3 +9,6 @@ export const getqrCode = (params) => {
 export const loginApp = (params) => {
   return  http.get('/home/Login/loginApp',params)
 }
+export const checklogin = (params) => {
+  return  http.get('/home/Login/checklogin',params)
+}

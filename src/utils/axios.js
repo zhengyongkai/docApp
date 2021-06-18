@@ -46,7 +46,8 @@ const $axios = axios.create({
 $axios.interceptors.request.use(
   (config) => {
     //调用登录接口时不添加鉴权
-    if (!(/home\/Login/.test(config.url) && config.method === "post")) {
+    console.log(/home\/Login/.test(config.url))
+    if ((!(/home\/Login/.test(config.url)) && config.method === "post")) {
       try {
         config.headers.token = Store.state.token
           ? JSON.parse(Store.state.token)

@@ -47,8 +47,12 @@
         </div>
         <div v-else>
           <div class="qq_login">
-            <div style="position:relative;width:100%" >
-              <img :src="qrCode"  alt="" style="width:300px;height:300px" /><br />
+            <div style="position:relative;width:100%">
+              <img
+                :src="qrCode"
+                alt=""
+                style="width:300px;height:300px"
+              /><br />
               <div class="cover" v-if="guoqi" @click="getNewCode">
                 <div style="margin-top: 80px;">
                   <i class="iconfont icon-8" />
@@ -83,26 +87,42 @@ export default {
   mounted() {
     this.getQrCode("sss");
   },
-  unmounted(){
-    clearInterval(this.timer)
-    this.timer = null
+  unmounted() {
+    clearInterval(this.timer);
+    this.timer = null;
   },
   methods: {
-    getNewCode(){
-      this.getQrCode('sss');
+    getNewCode() {
+      this.getQrCode();
     },
-    getQrCode(params) {
-      this.$api.getqrCode(params).then((res) => {
-        clearInterval(this.timer)
+    getQrCode() {
+      //
+      this.$api.getqrCode().then((res) => {
+        clearInterval(this.timer);
         this.qrCode = res.qrcode;
         this.guoqi = false;
         this.timer = setInterval(() => {
-          this.num++;
           if (this.num == 60) {
             this.num = 0;
             this.guoqi = true;
+          } else {
+            this.num++;
+            this.$api
+              .checklogin({
+                token: res.token,
+              })
+              .then((res) => {
+                if (res.user.account) {
+                  this.$message.success("扫码登陆成功");
+                  this.$store.commit(
+                    "setToken",
+                    JSON.stringify(res.user.token)
+                  );
+                  this.$router.replace({ name: "index" });
+                }
+              });
           }
-        },100);
+        }, 1000);
       });
     },
     choose(type) {
