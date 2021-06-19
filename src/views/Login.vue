@@ -101,25 +101,25 @@ export default {
         clearInterval(this.timer);
         this.qrCode = res.qrcode;
         this.guoqi = false;
-        this.timer = setInterval(() => {
-          if (this.num == 60) {
-            this.num = 0;
-            this.guoqi = true;
-          } else {
-            this.num++;
-            this.$api
-              .checklogin({
-                token: res.token,
-              })
-              .then((res) => {
-                if (res.user.account) {
-                  this.$message.success("扫码登陆成功");
-                  this.$store.commit("setToken", JSON.stringify(res.token));
-                  this.$router.replace({ name: "index" });
-                }
-              });
-          }
-        }, 1000);
+        // this.timer = setInterval(() => {
+        //   if (this.num == 60) {
+        //     this.num = 0;
+        //     this.guoqi = true;
+        //   } else {
+        //     this.num++;
+        //     this.$api
+        //       .checklogin({
+        //         token: res.token,
+        //       })
+        //       .then((res) => {
+        //         if (res.user.account) {
+        //           this.$message.success("扫码登陆成功");
+        //           this.$store.commit("setToken", JSON.stringify(res.token));
+        //           this.$router.replace({ name: "index" });
+        //         }
+        //       });
+        //   }
+        // }, 1000);
       });
     },
     choose(type) {
@@ -134,7 +134,7 @@ export default {
       this.$api.login(this.formData).then((res) => {
         this.$message.success("登陆成功");
         this.$store.commit("setToken", JSON.stringify(res.token));
-        this.$store.commit("setUserInfo", res.user);
+        this.$store.commit("setUserInfo", JSON.stringify(res.user));
         setTimeout(()=>{
            this.$router.replace({ name: "index" });
         },2000)

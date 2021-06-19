@@ -9,7 +9,7 @@ export default {
     window.localStorage.setItem('__token__', token);
   },
   setUserInfo(state, userinfo) {
-    state.userInfo = userinfo;
+    state.userInfo = JSON.parse(userinfo || '');
     window.localStorage.setItem('__userinfo__', userinfo);
   },
 }

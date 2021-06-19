@@ -103,12 +103,12 @@
               </div>
               <div
                 class="left-item"
-                @click="selectItem(i+9)"
-                :class="select == i+9 ? 'select' : ''"
+                @click="selectItem(i + 9)"
+                :class="select == i + 9 ? 'select' : ''"
                 v-for="(v, i) in mySongSheet"
                 :key="i"
               >
-                <span>{{ v.name }}</span>
+                <span>{{ v.group_name }}</span>
               </div>
             </div>
           </div>
@@ -190,17 +190,13 @@ export default {
   components: {
     // musicBottom: musicBottom,
   },
-  created() {},
+  created() {
+    console.log(this.$store.state)
+  },
   mounted() {
-    this.$http
-      .post("/home/group/xxx", {
-        username: "zhengyongkai1",
-        password: "admin",
-      })
-      .then((res) => {
-        console.log(res);
-        // this.$store.commit('setToken', res.token);
-      });
+    this.$http.get("/home/group/getSongSheet").then((res) => {
+      this.mySongSheet = res.list;
+    });
   },
   methods: {
     selectItem(val) {
@@ -219,11 +215,18 @@ export default {
         this.$message.info("请输入歌单名字");
         return false;
       }
-      this.mySongSheet.unshift({
-        name: this.addInfo.songsheet,
-      });
-      this.createInputVisable = false;
-      this.addInfo.songsheet = "";
+      this.$http
+        .post("/home/group/addSongSheet", {
+          group_name: this.addInfo.songsheet,
+        })
+        .then(() => {
+          this.$message.success("添加成功");
+          this.mySongSheet.unshift({
+            group_name: this.addInfo.songsheet,
+          });
+          this.createInputVisable = false;
+          this.addInfo.songsheet = "";
+        });
     },
   },
 };

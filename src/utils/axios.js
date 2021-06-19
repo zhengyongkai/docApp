@@ -23,6 +23,10 @@ function Intercept(response) {
     case 404:
       return Promise.reject(response.data);
     case 500:
+      notification["error"]({
+        message: "服务器错误",
+        description: "服务器错误，请联系管理员",
+      });
       return Promise.reject(response.data);
     case 502:
       return Promise.reject(response.data);
@@ -46,7 +50,7 @@ const $axios = axios.create({
 $axios.interceptors.request.use(
   (config) => {
     //调用登录接口时不添加鉴权
-    if ((!(/Login/.test(config.url)) && config.method === "post")) {
+    if ((!(/Login/.test(config.url) || /qrcode/.test(config.url)))) {
       try {
         config.headers.token = Store.state.token
           ? JSON.parse(Store.state.token)
