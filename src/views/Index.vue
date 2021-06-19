@@ -84,7 +84,7 @@
             <div class="title">
               <div>创建的歌单</div>
               <div class="icon">
-                <i class="iconfont icon-add1"></i>
+                <i class="iconfont icon-add1" @click="addMusicShow"></i>
                 <i
                   class="iconfont "
                   :class="createMusicShow ? 'icon-zhankai' : 'icon-shouqi'"
@@ -93,19 +93,22 @@
               </div>
             </div>
             <div class="left-items" v-show="createMusicShow">
-              <div
-                class="left-item"
-                @click="selectItem('9')"
-                :class="select == '9' ? 'select' : ''"
-              >
-                <span>我的歌单</span>
+              <div class="left-item" v-show="createInputVisable">
+                <input
+                  type="text"
+                  v-model.trim="addInfo.songsheet"
+                  placeholder="请输入名称（回车添加）"
+                  @keyup.enter="addSongSheet"
+                />
               </div>
               <div
                 class="left-item"
-                @click="selectItem('10')"
-                :class="select == '10' ? 'select' : ''"
+                @click="selectItem(i+9)"
+                :class="select == i+9 ? 'select' : ''"
+                v-for="(v, i) in mySongSheet"
+                :key="i"
               >
-                <span>歌单1</span>
+                <span>{{ v.name }}</span>
               </div>
             </div>
           </div>
@@ -149,8 +152,8 @@
               </div>
             </div>
             <div class="msc-right">
-              <img src="@/assets/user.jpg" />
-              <div>_V</div>
+              <img :src="userInfo.head_img" />
+              <div>{{ userInfo.account }}</div>
             </div>
           </div>
         </div>
@@ -168,6 +171,19 @@ export default {
       select: "1",
       createMusicShow: true,
       favMusicShow: false,
+      userInfo: this.$store.state.userInfo,
+      createInputVisable: false,
+      addInfo: {
+        songsheet: "",
+      },
+      mySongSheet: [
+        {
+          name: "我的歌单",
+        },
+        {
+          name: "歌单1",
+        },
+      ],
     };
   },
   props: [],
@@ -194,6 +210,21 @@ export default {
       this[key] = !this[key];
     },
     onHandle() {},
+    addMusicShow() {
+      this.createMusicShow = true;
+      this.createInputVisable = !this.createInputVisable;
+    },
+    addSongSheet() {
+      if (!this.addInfo.songsheet || this.addInfo.songsheet === "") {
+        this.$message.info("请输入歌单名字");
+        return false;
+      }
+      this.mySongSheet.unshift({
+        name: this.addInfo.songsheet,
+      });
+      this.createInputVisable = false;
+      this.addInfo.songsheet = "";
+    },
   },
 };
 </script>

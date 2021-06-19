@@ -51,10 +51,10 @@
               <img
                 :src="qrCode"
                 alt=""
-                style="width:300px;height:300px"
+                style="width:200px;height:200px"
               /><br />
               <div class="cover" v-if="guoqi" @click="getNewCode">
-                <div style="margin-top: 80px;">
+                <div style="margin-top: 35px;">
                   <i class="iconfont icon-8" />
                 </div>
               </div>
@@ -114,10 +114,7 @@ export default {
               .then((res) => {
                 if (res.user.account) {
                   this.$message.success("扫码登陆成功");
-                  this.$store.commit(
-                    "setToken",
-                    JSON.stringify(res.user.token)
-                  );
+                  this.$store.commit("setToken", JSON.stringify(res.token));
                   this.$router.replace({ name: "index" });
                 }
               });
@@ -137,7 +134,10 @@ export default {
       this.$api.login(this.formData).then((res) => {
         this.$message.success("登陆成功");
         this.$store.commit("setToken", JSON.stringify(res.token));
-        this.$router.replace({ name: "index" });
+        this.$store.commit("setUserInfo", res.user);
+        setTimeout(()=>{
+           this.$router.replace({ name: "index" });
+        },2000)
       });
     },
   },
