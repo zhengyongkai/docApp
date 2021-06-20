@@ -101,7 +101,11 @@
                   @keyup.enter="addSongSheet"
                 />
               </div>
+
               <div
+                v-rightMenu="menudata"
+                @contextmenu.prevent
+                @otherMethods='(item)=>otherMethods(item,v)'
                 class="left-item"
                 @click="selectItem(i + 9)"
                 :class="select == i + 9 ? 'select' : ''"
@@ -184,6 +188,22 @@ export default {
           name: "歌单1",
         },
       ],
+      menudata: {
+        // 菜单box的样式   Menu box style
+        boxStyle: "width:150px;background:#fff;color:#fff;border-radius:20px",
+        // 菜单选项的样式 Style of menu options
+        optionStyle: "background:#fff;color:#000;line-height:30px;font-size:14px;",
+        menus: [
+          {
+            content: "右键菜单二",
+            callback: "onOtherMethods",
+          },
+            {
+            content: "右键菜单二",
+            callback: "onOtherMethods",
+          },
+        ],
+      },
     };
   },
   props: [],
@@ -191,7 +211,7 @@ export default {
     // musicBottom: musicBottom,
   },
   created() {
-    console.log(this.$store.state)
+    console.log(this.$store.state);
   },
   mounted() {
     this.$http.get("/home/group/getSongSheet").then((res) => {
@@ -199,6 +219,10 @@ export default {
     });
   },
   methods: {
+    otherMethods(res,item){
+      console.log(res)
+      console.log(item.group_name)
+    },
     selectItem(val) {
       this.select = val;
     },
@@ -277,10 +301,9 @@ export default {
   .left-items {
     .left-item {
       font-size: 12px;
-      padding: 5px 0 5px 10px;
+      padding: 5px 0 10px 10px;
       display: flex;
       align-items: center;
-      margin-bottom: 5px;
       i {
         font-size: 12px;
         margin-right: 10px;
