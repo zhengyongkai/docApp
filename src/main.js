@@ -1,5 +1,5 @@
 import { createApp } from 'vue'
-import { ActionBar, ActionBarIcon, ActionBarButton, Divider, Popup, Overlay, Loading, Dialog, ContactCard, Form, AddressEdit, AddressList, Field, CellGroup, Cell, SwipeCell, Icon, Stepper, Card, Checkbox, CheckboxGroup, Button, Swipe, SwipeItem, PullRefresh, List, Tab, Tabs, SubmitBar, Toast, Skeleton } from 'vant'
+import { ActionBar, ActionBarIcon, ActionBarButton, Divider, Popup, Overlay, Loading, Dialog, ContactCard, Form, AddressEdit, AddressList, Field, CellGroup, Cell, SwipeCell, Stepper, Card, Checkbox, CheckboxGroup, Button, Swipe, SwipeItem, PullRefresh, List, Tab, Tabs, SubmitBar, Toast, Skeleton } from 'vant'
 import App from './App.vue'
 import store from './store'
 import router from './router'
@@ -11,7 +11,7 @@ import http from '@utils/http'
 // import '@/common/js/utils.js'
 import $api from '@/api'
 import BetterScroll from '@/components/wxScroll'
-import {message} from 'ant-design-vue'
+import {message,Icon} from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css';
 
 import rightMenu from "@/components/rightmenu";
@@ -41,7 +41,6 @@ app.use(ActionBarButton)
   .use(CellGroup)
   .use(Cell)
   .use(SwipeCell)
-  .use(Icon)
   .use(Stepper)
   .use(Card)
   .use(Button)
@@ -55,6 +54,7 @@ app.use(ActionBarButton)
   .use(Checkbox)
   .use(CheckboxGroup)
   .use(Skeleton)
+  .use(Icon)
 app.use(router)
 app.use(store)
 app.use(rightMenu)

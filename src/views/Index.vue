@@ -103,16 +103,17 @@
               </div>
 
               <div
-                v-rightMenu="menudata"
-                @contextmenu.prevent
-                @otherMethods='(item)=>otherMethods(item,v)'
                 class="left-item"
                 @click="selectItem(i + 9)"
                 :class="select == i + 9 ? 'select' : ''"
                 v-for="(v, i) in mySongSheet"
                 :key="i"
               >
-                <span>{{ v.group_name }}</span>
+                <div>{{ v.group_name }}</div>
+                <div style="display:flex;margin-left:auto">
+                  <div><a-icon type="edit" /></div>
+                  <div><a-icon type="edit" /></div>
+                </div>
               </div>
             </div>
           </div>
@@ -180,30 +181,7 @@ export default {
       addInfo: {
         songsheet: "",
       },
-      mySongSheet: [
-        {
-          name: "我的歌单",
-        },
-        {
-          name: "歌单1",
-        },
-      ],
-      menudata: {
-        // 菜单box的样式   Menu box style
-        boxStyle: "width:150px;background:#fff;color:#fff;border-radius:20px",
-        // 菜单选项的样式 Style of menu options
-        optionStyle: "background:#fff;color:#000;line-height:30px;font-size:14px;",
-        menus: [
-          {
-            content: "右键菜单二",
-            callback: "onOtherMethods",
-          },
-            {
-            content: "右键菜单二",
-            callback: "onOtherMethods",
-          },
-        ],
-      },
+      mySongSheet: [],
     };
   },
   props: [],
@@ -211,17 +189,14 @@ export default {
     // musicBottom: musicBottom,
   },
   created() {
-    console.log(this.$store.state);
+    this.getSongSheet();
   },
-  mounted() {
-    this.$http.get("/home/group/getSongSheet").then((res) => {
-      this.mySongSheet = res.list;
-    });
-  },
+  mounted() {},
   methods: {
-    otherMethods(res,item){
-      console.log(res)
-      console.log(item.group_name)
+    getSongSheet() {
+      this.$api.getSongSheet().then((res) => {
+        this.mySongSheet = res.list;
+      });
     },
     selectItem(val) {
       this.select = val;
@@ -239,8 +214,8 @@ export default {
         this.$message.info("请输入歌单名字");
         return false;
       }
-      this.$http
-        .post("/home/group/addSongSheet", {
+      this.$api
+        .addSongSheet({
           group_name: this.addInfo.songsheet,
         })
         .then(() => {
