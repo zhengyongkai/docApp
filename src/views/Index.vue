@@ -110,9 +110,9 @@
                 :key="i"
               >
                 <div>{{ v.group_name }}</div>
-                <div style="display:flex;margin-left:auto">
-                  <div><a-icon type="edit" /></div>
-                  <div><a-icon type="edit" /></div>
+                <div style="display:flex;margin-left:auto;align-items: center;margin-right: 10px;">
+                  <div style="margin-right:5px"><edit-outlined/></div>
+                  <div @click.prevent="deleteSongSheet(v)"><delete-outlined /></div>
                 </div>
               </div>
             </div>
@@ -170,6 +170,8 @@
 </template>
 <script>
 // import musicBottom from "@/components/musicBottom.vue";
+ import EditOutlined from '@ant-design/icons-vue/EditOutlined';
+  import DeleteOutlined from '@ant-design/icons-vue/DeleteOutlined';
 export default {
   data() {
     return {
@@ -187,6 +189,7 @@ export default {
   props: [],
   components: {
     // musicBottom: musicBottom,
+    EditOutlined,DeleteOutlined
   },
   created() {
     this.getSongSheet();
@@ -208,6 +211,14 @@ export default {
     addMusicShow() {
       this.createMusicShow = true;
       this.createInputVisable = !this.createInputVisable;
+    },
+    deleteSongSheet(item){
+      this.$api.deleteSongSheet({
+        group_id:item.group_id
+      }).then(()=>{
+        this.$message.success('删除成功')
+        this.getSongSheet()
+      })
     },
     addSongSheet() {
       if (!this.addInfo.songsheet || this.addInfo.songsheet === "") {

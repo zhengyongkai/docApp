@@ -11,7 +11,7 @@ import http from '@utils/http'
 // import '@/common/js/utils.js'
 import $api from '@/api'
 import BetterScroll from '@/components/wxScroll'
-import {message,Icon} from 'ant-design-vue'
+import {message} from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css';
 
 import rightMenu from "@/components/rightmenu";
@@ -54,7 +54,6 @@ app.use(ActionBarButton)
   .use(Checkbox)
   .use(CheckboxGroup)
   .use(Skeleton)
-  .use(Icon)
 app.use(router)
 app.use(store)
 app.use(rightMenu)
