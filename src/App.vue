@@ -103,4 +103,5 @@ html, body {
 .wx-content-color{
   background: #F7F7F7;
 }
+
 </style>

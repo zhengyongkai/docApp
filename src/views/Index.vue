@@ -101,7 +101,6 @@
                   @keyup.enter="addSongSheet"
                 />
               </div>
-
               <div
                 class="left-item"
                 @click="selectItem(i + 9)"
@@ -109,10 +108,28 @@
                 v-for="(v, i) in mySongSheet"
                 :key="i"
               >
-                <div>{{ v.group_name }}</div>
-                <div style="display:flex;margin-left:auto;align-items: center;margin-right: 10px;">
-                  <div style="margin-right:5px"><edit-outlined/></div>
-                  <div @click.prevent="deleteSongSheet(v)"><delete-outlined /></div>
+                <div style="width: 100%;" v-if="v.canedit">
+                  <input
+                    type="text"
+                    style="color:#000;width:94%"
+                    :value="v.group_name"
+                    @keyup.enter="(target) => updateSongSheet(v, target)"
+                    placeholder="请输入名称（回车修改）"
+                  />
+                </div>
+                <div style="display:flex;width: 100%;" v-else>
+                  <div class="text-overflow" style="width:70%">{{ v.group_name }}</div>
+                  <div class="left-control">
+                    <div
+                      style="margin-right:10px;"
+                      @click="editGroupNameShow(v)"
+                    >
+                      <edit-outlined />
+                    </div>
+                    <div @click.prevent="deleteSongSheet(v)">
+                      <delete-outlined />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -170,8 +187,8 @@
 </template>
 <script>
 // import musicBottom from "@/components/musicBottom.vue";
- import EditOutlined from '@ant-design/icons-vue/EditOutlined';
-  import DeleteOutlined from '@ant-design/icons-vue/DeleteOutlined';
+import EditOutlined from "@ant-design/icons-vue/EditOutlined";
+import DeleteOutlined from "@ant-design/icons-vue/DeleteOutlined";
 export default {
   data() {
     return {
@@ -189,7 +206,8 @@ export default {
   props: [],
   components: {
     // musicBottom: musicBottom,
-    EditOutlined,DeleteOutlined
+    EditOutlined,
+    DeleteOutlined,
   },
   created() {
     this.getSongSheet();
@@ -209,16 +227,51 @@ export default {
     },
     onHandle() {},
     addMusicShow() {
+      this.closeInput();
       this.createMusicShow = true;
       this.createInputVisable = !this.createInputVisable;
     },
-    deleteSongSheet(item){
-      this.$api.deleteSongSheet({
-        group_id:item.group_id
-      }).then(()=>{
-        this.$message.success('删除成功')
-        this.getSongSheet()
-      })
+    deleteSongSheet(item) {
+      this.$api
+        .deleteSongSheet({
+          group_id: item.group_id,
+        })
+        .then(() => {
+          this.$message.success("删除成功");
+          this.getSongSheet();
+        });
+    },
+    updateSongSheet(item, e) {
+      let value = e.target.value;
+      if (value == item.group_name) {
+        item.canedit = false;
+        return false;
+      }
+      if (!item.group_name || value === "") {
+        this.$message.info("请输入歌单名字");
+        return false;
+      }
+      this.$api
+        .editSongSheet({
+          group_id: item.group_id,
+          group_name: value,
+        })
+        .then(() => {
+          this.$message.success("修改成功");
+          item.canedit = false;
+          this.getSongSheet();
+        });
+    },
+    closeInput() {
+      this.createInputVisable = false;
+      this.mySongSheet.forEach((element) => {
+        element.canedit = false;
+      });
+    },
+    editGroupNameShow(v) {
+      this.closeInput();
+      v.canedit = true;
+      this.$forceUpdate();
     },
     addSongSheet() {
       if (!this.addInfo.songsheet || this.addInfo.songsheet === "") {
@@ -251,7 +304,8 @@ export default {
   width: 65%;
   height: 90%;
   background: #fff;
-  .borderRadius(10px);
+  .borderRadius(8px);
+  overflow: hidden;
   display: flex;
 }
 .left {
@@ -287,7 +341,8 @@ export default {
   .left-items {
     .left-item {
       font-size: 12px;
-      padding: 5px 0 10px 10px;
+      margin-bottom: 5px;
+      padding: 5px 0 5px 10px;
       display: flex;
       align-items: center;
       i {
@@ -303,10 +358,20 @@ export default {
           color: #1ecf9e;
         }
       }
+      .left-control {
+        display: none;
+        color: #999;
+        margin-left: auto;
+        align-items: center;
+        margin-right: 10px;
+      }
     }
     .left-item:hover {
       background: #eee;
       .borderRadius(5px);
+      .left-control {
+        display: flex;
+      }
     }
   }
   //myMusic
@@ -392,16 +457,19 @@ export default {
         /* WebKit browsers */
         color: #e2e2e2;
         font-size: 12px;
+        display: none;
       }
       ::-moz-placeholder {
         /* Mozilla Firefox 19+ */
         color: #e2e2e2;
         font-size: 12px;
+        display: none;
       }
       :-ms-input-placeholder {
         /* Internet Explorer 10+ */
         color: #e2e2e2;
         font-size: 12px;
+        display: none;
       }
     }
   }
@@ -417,29 +485,5 @@ export default {
 }
 .scroll-content {
   height: 84%;
-  padding-right: 10px;
-  overflow-y: hidden;
-}
-.scroll-content:hover {
-  overflow-y: scroll;
-}
-.scroll-content::-webkit-scrollbar {
-  width: 2px;
-  height: 2px;
-  /**/
-}
-.scroll-content::-webkit-scrollbar-track {
-  background: rgb(239, 239, 239);
-  border-radius: 2px;
-}
-.scroll-content::-webkit-scrollbar-thumb {
-  background: #bfbfbf;
-  border-radius: 10px;
-}
-.scroll-content::-webkit-scrollbar-thumb:hover {
-  background: #333;
-}
-.scroll-content::-webkit-scrollbar-corner {
-  background: #179a16;
 }
 </style>

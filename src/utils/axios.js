@@ -2,7 +2,7 @@ import axios from "axios";
 import Store from "../store";
 import router from "@router";
 import { notification } from "ant-design-vue";
-var pro = process.env.NODE_ENV === 'development' ? '/api/': ''
+var pro = process.env.NODE_ENV === 'development' ? 'http://localhost': 'http://134.175.103.137:8002'
 /**
  * 用于对响应数据的处理
  * @param {Object} response 响应数据
@@ -43,9 +43,8 @@ function Intercept(response) {
       return Promise.reject(response.data);
   }
 }
-
 const $axios = axios.create({
-  baseURL: document.location.origin + pro, // api的base_url
+  baseURL: pro, // api的base_url
   timeout: 20000, // 请求超时时间
 });
 $axios.interceptors.request.use(

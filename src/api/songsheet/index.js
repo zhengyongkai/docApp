@@ -7,5 +7,9 @@ export const addSongSheet = (params) => {
 };
 
 export const deleteSongSheet = (params) => {
-    return http.post("/home/group/deleteSongSheet", params);
+  return http.post("home/group/deleteSongSheet", params);
+};
+
+export const editSongSheet = (params) => {
+  return http.post("/home/group/editSongSheet", params);
 };
