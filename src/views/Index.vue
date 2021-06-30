@@ -287,6 +287,7 @@ export default {
           this.mySongSheet.unshift({
             group_name: this.addInfo.songsheet,
           });
+          this.getSongSheet();
           this.createInputVisable = false;
           this.addInfo.songsheet = "";
         });
