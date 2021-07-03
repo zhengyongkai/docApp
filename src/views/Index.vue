@@ -92,7 +92,7 @@
                 ></i>
               </div>
             </div>
-            <div class="left-items" v-show="createMusicShow">
+            <div class="left-items fav" v-show="createMusicShow">
               <div class="left-item" v-show="createInputVisable">
                 <input
                   type="text"
@@ -117,8 +117,13 @@
                     placeholder="请输入名称（回车修改）"
                   />
                 </div>
-                <div style="display:flex;width: 100%;" v-else>
-                  <div class="text-overflow" style="width:70%">{{ v.group_name }}</div>
+                <div
+                  style="display:flex;width: 100%"
+                  v-else
+                >
+                  <div class="text-overflow" style="width:70%">
+                    {{ v.group_name }}
+                  </div>
                   <div class="left-control">
                     <div
                       style="margin-right:10px;"
@@ -136,7 +141,7 @@
           </div>
           <div class="myMusic">
             <div class="title">
-              <div>我的音乐</div>
+              <div>收藏的歌单</div>
               <div class="icon">
                 <i class="iconfont icon-add1"></i>
                 <i
@@ -201,6 +206,38 @@ export default {
         songsheet: "",
       },
       mySongSheet: [],
+      rightClickMenu: {
+        el:".fav",
+        text: [
+          "查看资料",
+          { content: "复制用户id", status: true },
+          "移除该会话",
+          "在联系人中查看",
+          "在单聊窗口中打开",
+          "会话置顶",
+        ],
+        handler: {
+          checkingData(parameter) {
+            console.log(parameter);
+            console.log("查看资料点击事件");
+          },
+          copyId() {
+            console.log("复制用户id点击事件");
+          },
+          removeItem() {
+            console.log("移除会话点击事件");
+          },
+          showContact() {
+            console.log("在联系人中查看");
+          },
+          showSingleChat() {
+            console.log("在单聊窗口中打开");
+          },
+          topConversation() {
+            console.log("会话置顶");
+          },
+        },
+      },
     };
   },
   props: [],
@@ -320,10 +357,12 @@ export default {
   .logo {
     font-size: 14px;
     text-align: center;
-    margin-bottom: 10px;
+    // margin-bottom: 2px;
     padding-right: 10px;
     img {
-      width: 100%;
+      width: 60%;
+      margin-left: -40%;
+      margin-bottom: 20px;
     }
   }
   .title {
@@ -341,6 +380,7 @@ export default {
   }
   .left-items {
     .left-item {
+      position: relative;
       font-size: 12px;
       margin-bottom: 5px;
       padding: 5px 0 5px 10px;

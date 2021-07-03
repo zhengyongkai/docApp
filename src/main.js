@@ -13,8 +13,7 @@ import $api from '@/api'
 import BetterScroll from '@/components/wxScroll'
 import {message} from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css';
-
-import rightMenu from "@/components/rightmenu";
+import rightMenu from '@/components/rightClick'
 const app = createApp(App) // 创建实例
 app.component('wx-better-scroll', BetterScroll)
 app.config.globalProperties.$api = $api
@@ -54,7 +53,7 @@ app.use(ActionBarButton)
   .use(Checkbox)
   .use(CheckboxGroup)
   .use(Skeleton)
+  .use(rightMenu)
 app.use(router)
 app.use(store)
-app.use(rightMenu)
 app.mount('#app')
