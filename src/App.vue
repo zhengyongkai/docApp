@@ -37,13 +37,14 @@ import { useRouter } from 'vue-router'
 
 <style lang="less">
 @font-face {
-  // font-family: "fangping";
-  // src: url("./assets/fonts/fangping.ttf");
-  /* font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
-    Helvetica, Segoe UI, Arial, Roboto, "PingFang SC", "miui",
-    "Hiragino Sans GB", "Microsoft Yahei", sans-serif; */
+  font-family: 'HYLiLiangHeiJ';
+  src: url('https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxK.woff2')format('truetype');
+  
+  font-weight: normal;
+  font-style: normal;
 }
 html, body {
+  font-family: HYLiLiangHeiJ !important;
   height: 100%;
   overflow-x: hidden;
   // overflow-y: scroll;

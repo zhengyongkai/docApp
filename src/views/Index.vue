@@ -121,7 +121,7 @@
                   style="display:flex;width: 100%"
                   v-else
                 >
-                  <div class="text-overflow" style="width:70%">
+                  <div class="text-overflow" style="width:70%" @click="$router.push('/Index/MainContent')">
                     {{ v.group_name }}
                   </div>
                   <div class="left-control">
@@ -184,14 +184,15 @@
             </div>
           </div>
         </div>
-        <div class="musicContent"><router-view></router-view></div>
+        <div class="musicContent scroll-content">
+          <transition :name="'slide-left'"> <router-view></router-view></transition></div>
         <!-- <musicBottom @handle="onHandle"></musicBottom> -->
       </div>
     </div>
   </div>
 </template>
 <script>
-// import musicBottom from "@/components/musicBottom.vue";
+//  import musicBottom from "@/components/musicBottom.vue";
 import EditOutlined from "@ant-design/icons-vue/EditOutlined";
 import DeleteOutlined from "@ant-design/icons-vue/DeleteOutlined";
 export default {
@@ -242,7 +243,7 @@ export default {
   },
   props: [],
   components: {
-    // musicBottom: musicBottom,
+    //  musicBottom: musicBottom,
     EditOutlined,
     DeleteOutlined,
   },
@@ -348,7 +349,7 @@ export default {
 }
 .left {
   width: 25%;
-  padding: 16px 0;
+  padding: 20px 0;
   padding: 10px 0;
   padding-left: 10px;
   background: @bc;
@@ -430,7 +431,7 @@ export default {
     left: 25%;
     right: 0;
     .musicTopContent {
-      padding: 16px 24px;
+      padding: 16px 20px;
       display: flex;
       align-items: center;
       .backNext {
@@ -513,6 +514,16 @@ export default {
         display: none;
       }
     }
+  }
+  .musicContent{
+    position: absolute;
+    top:50px;
+    left:0;
+    padding: 0  20px;
+    right:0;
+    bottom: 60px;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 }
 
